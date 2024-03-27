@@ -2,23 +2,33 @@ package se.lexicon;
 
 import se.lexicon.model.*;
 
+import java.util.Arrays;
+
 public class App
 {
-    public static void main( String[] args )
-    {
-        Drink apple = new Drink(10, "Water", "Lemon taste", true );
-        Drink cola = new Drink(10, "Cola", "Lemon taste" );
-        System.out.println("apple = " + apple.examine());
-        System.out.println("cola = " + cola.examine());
+    public static void main(String[] args) {
+        Drink apple = new Drink(10, "Water", "Lemon taste", true); // 1
+        Drink cola = new Drink(10, "Cola", "Lemon taste"); // 2
+        Candy chocolate = new Candy(20, "Kinder Kids", CandyTaste.SWEET, CandyType.CHOCOLATE); // 3
+        // Snacks chips = new Snacks(20,"Chitoz", SnackType.CHIPS, "Salty"); // 4
 
-        Candy gummi = new Candy(20, "tuggummi", CandyTaste.MINT, CandyType.GUM);
-        System.out.println("gummi =" + gummi.examine());
+        Product[] products = {apple, cola, chocolate};
 
-        Candy tablet = new Candy(25, "Läkerol", CandyTaste.CHILI);
-        System.out.println("tablet =" + tablet.examine());
+        VendingMachine vendingMachine1 = new VendingMachine(products);
+        vendingMachine1.addCurrency(10);
+        System.out.println(vendingMachine1.getBalance()); // 10
+        vendingMachine1.addCurrency(5);
+        System.out.println(vendingMachine1.getBalance()); // 15
 
-        Snacks popcorn = new Snacks("Poppisar", SnackType.POPCORN, "chilli");
-        System.out.println("Smack = " + popcorn.examine());
+        System.out.println(Arrays.toString(vendingMachine1.getProducts()));
+
+        // call request method 4
+
+        vendingMachine1.request(1);
+        System.out.println(vendingMachine1.getBalance());
+        System.out.println(Arrays.toString(vendingMachine1.getProducts()));
+        System.out.println(vendingMachine1.getDescription(1));
+
 
     }
 }
